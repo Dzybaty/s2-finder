@@ -7,21 +7,23 @@ export default {
     alignItems: 'center',
     justifyContent: 'center',
     fontFamily: 'Impact, serif',
-    fontSize: '2rem',
+    fontSize: '1rem',
     textShadow: '2px 2px black',
     color: '#CCB69C',
 
-    '@media (max-width: 700px)': {
-      fontSize: '1rem',
+    '@media (min-width: 700px)': {
+      fontSize: '2rem',
     },
 
     img: {
       display: 'flex',
-      height: '100dvh',
+      height: 'auto',
+      maxWidth: '100dvw',
+      objectFit: 'cover',
 
-      '@media (max-width: 1900px)': {
-        width: '100vw',
-        height: 'auto',
+      '@media (min-width: 1920px)': {
+        width: 'auto',
+        height: '100dvh',
       },
     },
   }),
@@ -36,7 +38,7 @@ export default {
 
     ':disabled': {
       display: 'none',
-    }
+    },
   }),
 
   prevButton: css({

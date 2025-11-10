@@ -12,25 +12,29 @@ const flashAnimation = keyframes(`
 
 export default {
   container: css({
-    position: 'relative',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
     fontFamily: 'Impact, serif',
     fontSize: '1rem',
     textShadow: '2px 2px black',
     color: '#CCB69C',
     height: 'calc(100dvw / 1.77)',
     width: '100dvw',
+    overflowX: 'hidden',
 
     '@media (min-width: 700px)': {
       fontSize: '2rem',
     },
 
-    '@media (min-width: 1920px)': {
+    '@media (min-width: 1000px)': {
       width: 'calc(100dvh * 1.77)',
-      height: '100dvh',
+      height: '100vh',
     },
+  }),
+
+  imageWrapper: css({
+    position: 'relative',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
 
     img: {
       width: '100%',

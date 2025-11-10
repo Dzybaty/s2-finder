@@ -37,25 +37,27 @@ export const Slider = ({
 
   return (
     <div css={styles.container} {...swipeHandlers}>
-      <ProgressBar currentStep={currentStep.id} lastStep={lastStepId} />
-      <button
-        css={[styles.stepButton, styles.prevButton]}
-        onClick={onPrev}
-        disabled={isPrevStepDisabled}
-      />
-      <img src={currentStep.image} onLoad={() => setIsImageLoaded(true)} />
-      {!isImageLoaded && (
-        <div css={styles.loader}>
-          <AstraIcon />
-        </div>
-      )}
-      <button
-        css={[styles.stepButton, styles.nextButton]}
-        onClick={onNext}
-        disabled={isNextStepDisabled}
-      />
-      <div css={styles.header}>{operationName}</div>
-      <div css={styles.label}>{currentStep.type}</div>
+      <div css={styles.imageWrapper}>
+        <ProgressBar currentStep={currentStep.id} lastStep={lastStepId} />
+        <img src={currentStep.image} onLoad={() => setIsImageLoaded(true)} />
+        <button
+          css={[styles.stepButton, styles.prevButton]}
+          onClick={onPrev}
+          disabled={isPrevStepDisabled}
+        />
+        <button
+          css={[styles.stepButton, styles.nextButton]}
+          onClick={onNext}
+          disabled={isNextStepDisabled}
+        />
+        <div css={styles.header}>{operationName}</div>
+        <div css={styles.label}>{currentStep.type}</div>
+        {!isImageLoaded && (
+          <div css={styles.loader}>
+            <AstraIcon />
+          </div>
+        )}
+      </div>
     </div>
   );
 };

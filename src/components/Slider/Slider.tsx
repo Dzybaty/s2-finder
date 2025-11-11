@@ -57,6 +57,10 @@ export const Slider = ({ operation, setMediaSessionHandlers }: SliderProps) => {
     onPrev: handlePrevStep,
   });
 
+  if (!operation?.collectables?.[currentStepId]) {
+    return null;
+  }
+
   const { name } = operation;
   const { type, image, pathVariant } = operation.collectables[currentStepId];
 

@@ -1,16 +1,12 @@
-import { css, keyframes } from '@emotion/react';
-
-const flashAnimation = keyframes(`
-  0% {
-    filter: brightness(1) drop-shadow(0 0 0px black);
-  }
-  100% {
-    filter: brightness(1.6) drop-shadow(0 0 10px white);
-  }
-}
-`);
+import { css } from '@emotion/react';
 
 export default {
+  wrapper: css({
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }),
+
   container: css({
     fontFamily: 'Impact, serif',
     fontSize: '1rem',
@@ -38,19 +34,6 @@ export default {
 
     img: {
       width: '100%',
-    },
-  }),
-
-  loader: css({
-    position: 'absolute',
-
-    svg: {
-      width: 70,
-      animation: `${flashAnimation} 1s infinite alternate`,
-
-      '@media (min-width: 700px)': {
-        width: 100,
-      },
     },
   }),
 

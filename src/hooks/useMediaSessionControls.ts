@@ -1,17 +1,24 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import silence from '@/assets/audio/silence.mp3';
+
+type HandlerFunc = () => void;
 
 type Props = {
   isMediaSessionEnabled: boolean;
-  onPrev: () => void;
-  onNext: () => void;
 };
 
-export const useMediaSessionControls = ({
-  isMediaSessionEnabled,
-  onNext,
-  onPrev,
-}: Props) => {
+export const useMediaSessionControls = ({ isMediaSessionEnabled }: Props) => {
+  const prevHandler = useRef<HandlerFunc | null>(null);
+  const nextHandler = useRef<HandlerFunc | null>(null);
+
+  const setMediaSessionHandlers = (
+    onPrev: HandlerFunc,
+    onNext: HandlerFunc,
+  ) => {
+    prevHandler.current = onPrev;
+    nextHandler.current = onNext;
+  };
+
   useEffect(() => {
     if (!isMediaSessionEnabled) {
       return;
@@ -31,9 +38,11 @@ export const useMediaSessionControls = ({
           });
 
           navigator.mediaSession.setActionHandler('previoustrack', () =>
-            onPrev(),
+            prevHandler.current?.(),
           );
-          navigator.mediaSession.setActionHandler('nexttrack', () => onNext());
+          navigator.mediaSession.setActionHandler('nexttrack', () =>
+            nextHandler.current?.(),
+          );
         }
       })
       .catch(() => {});
@@ -41,5 +50,7 @@ export const useMediaSessionControls = ({
     return () => {
       audio.pause();
     };
-  }, [isMediaSessionEnabled, onNext, onPrev]);
+  }, [isMediaSessionEnabled]);
+
+  return { setMediaSessionHandlers };
 };

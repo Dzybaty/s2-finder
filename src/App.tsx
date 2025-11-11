@@ -1,7 +1,9 @@
 import { useState } from 'react';
 
+import { useMediaSessionControls } from '@/hooks';
+
 import { Menu } from '@/components/Menu/Menu';
-import { Viewer } from '@/components/Viewer/Viewer';
+import { Slider } from '@/components/Slider/Slider';
 import './App.css';
 
 import { operations } from '@/data';
@@ -10,6 +12,10 @@ import type { OperationT } from '@/types';
 function App() {
   const [operation, setOperation] = useState<undefined | OperationT>(undefined);
   const [isMediaSessionEnabled, setIsMediaSessionEnabled] = useState(false);
+
+  const { setMediaSessionHandlers } = useMediaSessionControls({
+    isMediaSessionEnabled,
+  });
 
   const handleOperationSelect = (missionKey: string) => {
     const missionData = operations.find((op) => op.name === missionKey);
@@ -26,9 +32,9 @@ function App() {
         onElementClick={handleOperationSelect}
       />
       {operation && (
-        <Viewer
+        <Slider
           operation={operation}
-          isMediaSessionEnabled={isMediaSessionEnabled}
+          setMediaSessionHandlers={setMediaSessionHandlers}
         />
       )}
     </>

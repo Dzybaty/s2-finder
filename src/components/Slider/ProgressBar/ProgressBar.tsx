@@ -2,11 +2,11 @@ import styles from './styles';
 
 type ProgressBarProps = {
   currentStep: number;
-  lastStep: number;
+  stepsCount: number;
 };
 
-export const ProgressBar = ({ currentStep, lastStep }: ProgressBarProps) => {
-  const progressPercentage = currentStep * 100 / lastStep;
+export const ProgressBar = ({ currentStep, stepsCount }: ProgressBarProps) => {
+  const progressPercentage = (currentStep * 100) / stepsCount;
   const css = styles({ progress: progressPercentage });
 
   return (
